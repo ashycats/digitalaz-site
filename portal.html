@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Portal | Digital A-Z</title>
+<meta name="description" content="Client portal for Digital A-Z website design projects — complete your homework questionnaire and share files.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#805c7d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23805c7d'/%3E%3Ctext x='50' y='68' font-family='sans-serif' font-size='48' font-weight='700' fill='%23f4eae1' text-anchor='middle' letter-spacing='-3'%3EAZ%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--disp:"Space Grotesk",sans-serif;--mono:"Space Mono",monospace;--edit:"Instrument Serif",serif;--body:"Poppins",sans-serif;--ink:#1b141a;--ink-700:#463f45;--ink-500:#6f656d;--ink-200:#ddd4da;--cream:#f4eae1;--shell:#fbf7f4;--purple-dark:#805c7d;--purple:#b380a6;--purple-light:#cfb0c7;--purple-faint:#f3eaf0;--terra:#b5524f;--sage:#5f8a6b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--body);color:var(--ink);background:var(--cream);font-weight:300;-webkit-font-smoothing:antialiased}
+a{color:var(--purple-dark);text-decoration:none}
+a:hover{color:var(--terra)}
+h1,h2,h3{font-family:var(--disp);font-weight:600;margin:0;letter-spacing:-.03em;line-height:1}
+.wrap{max-width:860px;margin:0 auto;padding:0 clamp(1.2rem,4vw,2.5rem)}
+.mono{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.14em;color:var(--purple-dark)}
+.nav{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1.5px solid var(--ink)}
+.nav .row{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:1200px;margin:0 auto;padding:0 clamp(1.2rem,4vw,2.5rem)}
+.brand{white-space:nowrap;font-family:var(--disp);font-weight:700;font-size:1.15rem;letter-spacing:-.04em;color:var(--ink);display:flex;align-items:center;gap:.5rem}
+.brand .dot{width:11px;height:11px;background:var(--purple-dark);border-radius:50%}
+.navcta{white-space:nowrap;font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;background:var(--ink);color:var(--cream);padding:.7rem 1.1rem}
+.navcta:hover{background:var(--purple-dark);color:var(--cream)}
+.hero{padding:clamp(3rem,7vw,5.5rem) 0 clamp(2rem,4vw,3rem)}
+.hero h1{font-size:clamp(2.6rem,7vw,4.5rem);letter-spacing:-.04em;margin:.8rem 0 1.2rem}
+.hero h1 em{font-family:var(--edit);font-style:italic;font-weight:400;color:var(--terra)}
+.hero p{font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.6;max-width:52ch;margin:0;color:var(--ink-700)}
+.stepno{font-family:var(--disp);font-weight:700;font-size:3rem;color:var(--purple-light);letter-spacing:-.05em;line-height:1}
+section.block{padding:clamp(2.5rem,5vw,4rem) 0;border-top:1.5px solid var(--ink)}
+section.block h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:.6rem 0 .8rem}
+section.block>.wrap>p.lead{color:var(--ink-700);line-height:1.6;max-width:56ch;margin:0 0 2rem}
+fieldset{border:none;margin:0 0 2.4rem;padding:0}
+legend{font-family:var(--disp);font-weight:600;font-size:1.25rem;letter-spacing:-.02em;padding:0;margin-bottom:.3rem;border-top:2px solid var(--ink);padding-top:.9rem;width:100%}
+.field{margin-top:1.3rem;display:flex;flex-direction:column;gap:.45rem}
+label{font-weight:400;font-size:.95rem}
+label .req{color:var(--terra)}
+.hint{font-size:.82rem;color:var(--ink-500);margin:-.2rem 0 0}
+input[type=text],input[type=email],input[type=url],input[type=password],textarea,select{font-family:var(--body);font-weight:300;font-size:.95rem;color:var(--ink);background:var(--shell);border:1.5px solid var(--ink);padding:.75rem .9rem;width:100%;border-radius:0}
+textarea{min-height:96px;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--purple);outline-offset:1px}
+.choices{display:flex;flex-direction:column;gap:.5rem}
+.choice{display:flex;gap:.7rem;align-items:flex-start;background:var(--shell);border:1.5px solid var(--ink-200);padding:.7rem .9rem;cursor:pointer;transition:border-color .15s}
+.choice:hover{border-color:var(--purple)}
+.choice input{accent-color:var(--purple-dark);margin-top:.2rem}
+.choice span{font-size:.92rem;line-height:1.45}
+.submit{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;background:var(--ink);color:var(--cream);border:none;padding:1rem 1.8rem;cursor:pointer}
+.submit:hover{background:var(--purple-dark)}
+.submit:disabled{opacity:.6;cursor:wait}
+.form-note{font-size:.9rem;min-height:1.3em;margin-top:.9rem}
+.form-note.ok{color:var(--sage)}
+.form-note.err{color:var(--terra)}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+.filelist{margin:1.2rem 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.filelist li{display:flex;gap:.6rem;font-size:.95rem;line-height:1.5;align-items:baseline}
+.filelist li::before{content:"↪";color:var(--purple);font-family:var(--mono)}
+.subhead{font-family:var(--disp);font-weight:600;font-size:1.05rem;margin:1.6rem 0 0}
+.dropbtn{display:inline-block;font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;background:var(--purple-dark);color:var(--cream);padding:1rem 1.8rem;margin-top:1.6rem}
+.dropbtn:hover{background:var(--ink);color:var(--cream)}
+.foot{background:var(--ink);color:var(--cream);padding:clamp(3rem,6vw,5rem) 0 2rem;margin-top:2rem}
+.foot .top{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:2rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.18)}
+.foot .blurb{font-size:.92rem;line-height:1.55;opacity:.72;max-width:30ch;margin:1.1rem 0 0}
+.foot .blurb a{color:var(--purple-light);border-bottom:1px solid currentColor}
+.foot .word{font-family:var(--disp);font-weight:700;font-size:clamp(2.5rem,7vw,5.5rem);letter-spacing:-.05em;line-height:.9}
+.foot .word span{color:var(--purple-light)}
+.foot .col h4{font-family:var(--mono);text-transform:uppercase;font-size:.7rem;letter-spacing:.14em;color:var(--purple-light);margin:0 0 1rem}
+.foot .col a{display:block;font-size:.95rem;margin-bottom:.6rem;opacity:.85;transition:opacity .2s;color:var(--cream)}
+.foot .col a:hover{opacity:1;color:#c08a3e}
+.foot .bot{display:flex;justify-content:space-between;padding-top:1.5rem;font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;opacity:.6;flex-wrap:wrap;gap:.5rem}
+@media(max-width:820px){.foot .top{grid-template-columns:1fr 1fr}.foot .brand-col{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<div id="gate" style="position:fixed;inset:0;z-index:100;background:var(--cream);display:flex;align-items:center;justify-content:center;padding:1.5rem">
+  <form id="gateForm" style="width:100%;max-width:400px;text-align:center">
+    <div style="font-family:var(--disp);font-weight:700;font-size:1.15rem;letter-spacing:-.04em;display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:2rem"><span style="width:11px;height:11px;background:var(--purple-dark);border-radius:50%"></span>Digital A-Z</div>
+    <span class="mono">Client portal</span>
+    <h1 style="font-size:clamp(1.8rem,5vw,2.4rem);margin:.6rem 0 1.4rem">Enter your <em style="font-family:var(--edit);font-style:italic;font-weight:400;color:var(--terra)">passphrase</em></h1>
+    <input type="password" id="gatePass" autocomplete="off" placeholder="Passphrase" style="text-align:center">
+    <button class="submit" type="submit" style="width:100%;margin-top:.8rem">Enter &rarr;</button>
+    <p class="form-note err" id="gateNote" style="min-height:1.3em"></p>
+    <p class="hint" style="margin-top:1rem">Don't have the passphrase? <a href="/#contact">Contact us</a>.</p>
+  </form>
+</div>
+<script>
+(function(){
+  var HASH = '27cc6994fc1c01ce6659c6bddca9b69c4c6a9418065e612c69d110b3f7b11f8a';
+  var gate = document.getElementById('gate');
+  function sha(t){ return crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)).then(function(b){ return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }); }
+  function open(){ gate.style.display='none'; document.body.style.overflow=''; }
+  document.body.style.overflow='hidden';
+  if(sessionStorage.getItem('daz_portal')==='1'){ open(); }
+  document.getElementById('gateForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    sha(document.getElementById('gatePass').value.trim().toLowerCase()).then(function(h){
+      if(h===HASH){ try{sessionStorage.setItem('daz_portal','1');}catch(err){} open(); }
+      else{ document.getElementById('gateNote').textContent='That passphrase isn\u2019t right \u2014 try again.'; }
+    });
+  });
+})();
+</script>
+<nav class="nav"><div class="row"><a href="/" class="brand"><span class="dot"></span>Digital A-Z</a><a class="navcta" href="/#contact">Contact &rarr;</a></div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="mono">Client portal</span>
+  <h1>Homework for your <em>website</em> project</h1>
+  <p>Two steps: answer the questionnaire below, then upload your content and brand files. Skip any questions that don't apply — we'll cover gaps together.</p>
+</div></header>
+
+<section class="block" id="homework"><div class="wrap">
+  <span class="stepno">01</span>
+  <h2>The questionnaire</h2>
+  <p class="lead">Tell me about your business and what you want your new website to do.</p>
+  <form id="homeworkForm" novalidate="">
+    <div class="hp"><label for="company">Company</label><input type="text" id="company" name="company" tabindex="-1" autocomplete="off"></div>
+
+    <fieldset><legend>You</legend>
+      <div class="field"><label for="client_name">Your name <span class="req">*</span></label><input type="text" id="client_name" name="client_name" required=""></div>
+      <div class="field"><label for="client_email">Email <span class="req">*</span></label><input type="email" id="client_email" name="client_email" required=""></div>
+      <div class="field"><label for="business_name">Business name <span class="req">*</span></label><input type="text" id="business_name" name="business_name" required=""></div>
+    </fieldset>
+
+    <fieldset><legend>About your business</legend>
+      <div class="field"><label for="three_words">Describe your business in 3 words</label><input type="text" id="three_words" name="three_words"></div>
+      <div class="field"><label for="tagline">Do you have a tagline?</label><input type="text" id="tagline" name="tagline"></div>
+      <div class="field"><label for="ideal_customer">Who is your ideal customer?</label><textarea id="ideal_customer" name="ideal_customer"></textarea></div>
+      <div class="field"><label for="popular_offerings">Which of your products or services are most popular?</label><textarea id="popular_offerings" name="popular_offerings"></textarea></div>
+      <div class="field"><label for="competitors">Who are your main competitors?</label><textarea id="competitors" name="competitors"></textarea></div>
+      <div class="field"><label for="competitor_diff">Describe how you're similar to and different from your competitors</label><textarea id="competitor_diff" name="competitor_diff"></textarea></div>
+      <div class="field"><label for="existing_site">Do you already have a website? If so, what's the URL?</label><input type="text" id="existing_site" name="existing_site"></div>
+    </fieldset>
+
+    <fieldset><legend>About your new website</legend>
+      <div class="field"><label for="new_url">What will your URL be?</label><input type="text" id="new_url" name="new_url"></div>
+      <div class="field"><label>What is the primary goal for your new website? <span class="req">*</span></label>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="primary_goal" value="Promote my business and/or services" required=""><span>To promote my business and/or services</span></label>
+          <label class="choice"><input type="radio" name="primary_goal" value="Sell products directly (e-commerce)"><span>To sell products directly (e-commerce)</span></label>
+          <label class="choice"><input type="radio" name="primary_goal" value="Share my portfolio"><span>To share my portfolio</span></label>
+          <label class="choice"><input type="radio" name="primary_goal" value="Function as a blog"><span>To function as a blog</span></label>
+          <label class="choice"><input type="radio" name="primary_goal" value="Sell products indirectly"><span>To sell products indirectly</span></label>
+          <label class="choice"><input type="radio" name="primary_goal" value="Other"><span>Other</span></label>
+        </div>
+      </div>
+      <div class="field"><label for="top_actions">What are the top 3 actions you want visitors to take on your site?</label><textarea id="top_actions" name="top_actions"></textarea></div>
+      <div class="field"><label for="inspiration">Which websites do you find inspiring or would like to model your site after?</label><p class="hint">List names and/or URLs — any industry.</p><textarea id="inspiration" name="inspiration"></textarea></div>
+      <div class="field"><label for="features">Are there any website features or integrations you need?</label><p class="hint">For example, e-commerce functionality or a blog.</p><textarea id="features" name="features"></textarea></div>
+      <div class="field"><label for="seo_keywords">Which keywords should we use for website optimization (SEO)?</label><textarea id="seo_keywords" name="seo_keywords"></textarea></div>
+    </fieldset>
+
+    <fieldset><legend>Website identity</legend>
+      <div class="field"><label for="brand_guidelines">Brand guidelines</label><p class="hint">Share required brand fonts, colors (hex codes) and logos — or a link to your brand guidelines.</p><textarea id="brand_guidelines" name="brand_guidelines"></textarea></div>
+      <div class="field"><label for="design_prefs">Share any design preferences for your new website</label><p class="hint">Preferred colors, fonts, imagery, graphics, and other design elements.</p><textarea id="design_prefs" name="design_prefs"></textarea></div>
+      <div class="field"><label for="design_avoid">Are there any images, colors, or visuals we should avoid?</label><textarea id="design_avoid" name="design_avoid"></textarea></div>
+      <div class="field"><label>Which statement best reflects your content preferences? <span class="req">*</span></label>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="content_pref" value="All content must remain exactly as provided" required=""><span>All content must remain exactly as provided — no changes.</span></label>
+          <label class="choice"><input type="radio" name="content_pref" value="Open to minor copy editing"><span>I'm open to minor copy editing.</span></label>
+          <label class="choice"><input type="radio" name="content_pref" value="Would appreciate help with content creation"><span>I would appreciate help with content creation.</span></label>
+        </div>
+      </div>
+      <div class="field"><label>Will you need support sourcing stock photography? <span class="req">*</span></label><p class="hint">We can provide support for an additional hourly fee.</p>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="stock_photos" value="Yes" required=""><span>Yes</span></label>
+          <label class="choice"><input type="radio" name="stock_photos" value="No"><span>No</span></label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset><legend>Accounts &amp; profiles</legend>
+      <div class="field"><label for="social_handles">List your social media handles</label><p class="hint">LinkedIn, Instagram, Facebook, X, etc.</p><textarea id="social_handles" name="social_handles"></textarea></div>
+      <div class="field"><label for="business_profiles">Provide links to business profiles</label><p class="hint">For example, Google Business or Yelp.</p><textarea id="business_profiles" name="business_profiles"></textarea></div>
+      <p class="hint" style="margin-top:1.3rem">Please don't put passwords in this form. We'll collect login details for hosting, email marketing, and e-commerce securely during kickoff (via a password manager share).</p>
+    </fieldset>
+
+    <button class="submit" type="submit">Submit homework &rarr;</button>
+    <p class="form-note" id="hw-note"></p>
+  </form>
+</div></section>
+
+<section class="block" id="files"><div class="wrap">
+  <span class="stepno">02</span>
+  <h2>Share files &amp; resources</h2>
+  <p class="lead">Upload your text, images/photos, and logos to Dropbox.</p>
+  <h3 class="subhead">Website content</h3>
+  <ul class="filelist">
+    <li>Text for all of your pages, including headers</li>
+    <li>Content for each page saved in a separate file by page name (<em>About</em>, <em>Products_Services</em>)</li>
+    <li>Optional: opt-in form text, button text, proposed sitemap</li>
+  </ul>
+  <h3 class="subhead">Images, photos &amp; logos</h3>
+  <ul class="filelist">
+    <li>Name all images/photos by page location (About, Contact, etc.)</li>
+    <li>Images/photos must be a minimum of 1500 pixels wide</li>
+  </ul>
+  <a class="dropbtn" href="https://www.dropbox.com/request/R2voxg7TL5m4WQzN5neK" target="_blank" rel="noopener">Upload to Dropbox &rarr;</a>
+</div></section>
+
+<footer class="foot"><div class="wrap" style="max-width:1200px">
+  <div class="top">
+    <div class="brand-col"><div class="word">Digital<br><span>A&#8209;Z.</span></div><p class="blurb">Custom Squarespace websites, designed and built in Washington, DC. <a href="/#contact">atozwebcreative@gmail.com</a></p></div>
+    <div class="col"><h4>Explore</h4><a href="/#work">Work</a><a href="/#pricing">Packages</a><a href="/#faq">FAQ</a><a href="/#reviews">Reviews</a><a href="/#about">About Ashley</a></div>
+    <div class="col"><h4>Services</h4><a href="/#services">Custom Web Design</a><a href="/#services">Website Revamps</a><a href="/#services">SEO &amp; Add-Ons</a><a href="/#services">Training &amp; Support</a></div>
+    <div class="col"><h4>Connect</h4><a href="/#contact">Contact</a><a href="/portal">Client Portal</a><a href="https://www.digitalaz.co/squarespace" target="_blank" rel="noopener">Squarespace Design</a><a href="https://www.linkedin.com/in/ashleyzusman" target="_blank" rel="noopener">LinkedIn</a></div>
+  </div>
+  <div class="bot"><span>© 2026 Digital A-Z · Washington, DC</span><span>Squarespace Circle Gold Member</span></div>
+</div></footer>
+
+<script>
+(function(){
+  var SUPABASE_URL = 'https://jxnrmosgthbnegyszszc.supabase.co';
+  var SUPABASE_ANON_KEY = 'sb_publishable_y2cjJR8OvTh1zUJbD_Phkw_OxH5rFsP';
+  var form = document.getElementById('homeworkForm'); if(!form) return;
+  var note = document.getElementById('hw-note');
+  var loadedAt = Date.now();
+  var clientPromise = null;
+  function loadClient(){
+    if(clientPromise) return clientPromise;
+    clientPromise = new Promise(function(resolve){
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+      s.onload = function(){ resolve(window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)); };
+      s.onerror = function(){ resolve(null); };
+      document.head.appendChild(s);
+    });
+    return clientPromise;
+  }
+  form.addEventListener('focusin', loadClient, { once: true });
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    note.className = 'form-note';
+    if(!form.checkValidity()){ note.textContent = 'Please fill in the required fields.'; note.classList.add('err'); form.reportValidity(); return; }
+    if(form.company.value || Date.now() - loadedAt < 3000){ form.reset(); note.textContent = 'Thanks! Your homework is in.'; note.classList.add('ok'); return; }
+    var fd = new FormData(form);
+    var answers = {};
+    fd.forEach(function(v, k){ if(k !== 'company' && k !== 'client_name' && k !== 'client_email' && k !== 'business_name'){ answers[k] = (v || '').toString().trim() || null; } });
+    var row = { name: fd.get('client_name').trim(), email: fd.get('client_email').trim(), business: fd.get('business_name').trim(), answers: answers };
+    var btn = form.querySelector('.submit'); btn.disabled = true; note.textContent = 'Sending\u2026';
+    try{
+      var client = await loadClient();
+      if(!client) throw new Error('load');
+      var res = await client.from('client_homework').insert([row]);
+      if(res.error) throw res.error;
+      form.reset();
+      note.textContent = "Thanks! Your homework is in \u2014 next, upload your files below. I'll be in touch shortly.";
+      note.classList.add('ok');
+    }catch(err){
+      note.textContent = 'Something went wrong. Please email atozwebcreative@gmail.com.'; note.classList.add('err');
+    }finally{ btn.disabled = false; }
+  });
+})();
+</script>
+</body>
+</html>
