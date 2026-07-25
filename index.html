@@ -361,9 +361,8 @@ ul.az-bullets li::before {
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1rem,2.5vw,2rem)}
   .proj{background:var(--cream);color:var(--ink);border-radius:0;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s}
   .proj:hover{transform:translateY(-6px)}
-  .proj .ph{aspect-ratio:16/11;display:flex;align-items:flex-end;padding:1.4rem;position:relative;overflow:hidden}
+  .proj .ph{aspect-ratio:16/9;position:relative;overflow:hidden}
   .proj .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top center;z-index:0}
-  .proj .ph .mono{position:relative;z-index:1;font-size:.65rem;color:#fff;background:rgba(0,0,0,.5);padding:.35rem .6rem}
   .proj:nth-child(1) .ph{background:var(--terra)}
   .proj:nth-child(2) .ph{background:var(--gold)}
   .proj:nth-child(3) .ph{background:var(--sage)}
@@ -395,7 +394,8 @@ ul.az-bullets li::before {
   .about p{font-size:clamp(1rem,1.4vw,1.15rem);line-height:1.6;max-width:46ch;margin:0 0 1.2rem;color:var(--ink-700)}
   .about .cred{display:flex;gap:1.5rem;align-items:center;margin-top:1.8rem;flex-wrap:wrap}
   .about .cred .badge{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;border:1.5px solid var(--ink);padding:.5rem .8rem}
-  @media(max-width:820px){.about .inner{grid-template-columns:1fr}.about .photo{max-width:280px}}
+  @media(max-width:820px){.about .inner{grid-template-columns:1fr}.about .photo{max-width:260px}}
+  @media(max-width:560px){.about .photo{max-width:200px}}
 
   /* PRICING */
   .pricing{background:var(--shell);padding:clamp(4rem,8vw,7rem) 0}
@@ -403,6 +403,7 @@ ul.az-bullets li::before {
   .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2vw,1.5rem)}
   .plan{background:var(--cream);border:1.5px solid var(--ink);padding:clamp(1.6rem,3vw,2.2rem);display:flex;flex-direction:column;gap:1rem}
   .plan.feat{background:var(--purple-dark);color:var(--cream);border-color:var(--purple-dark)}
+  .plan.feat h3,.plan.feat .price,.plan.feat li{color:var(--cream)}
   .plan .mono{color:var(--purple-dark)}
   .plan.feat .mono{color:var(--purple-light)}
   .plan .price{font-family:var(--disp);font-weight:700;font-size:2.8rem;letter-spacing:-.04em;line-height:1}
@@ -420,12 +421,20 @@ ul.az-bullets li::before {
   /* KUDOS */
   .kudos{background:var(--gold);color:var(--ink);padding:clamp(4rem,8vw,7rem) 0}
   .kudos .mono{color:var(--ink);opacity:.65}
-  .kudos h2{font-size:clamp(2rem,5vw,3.5rem);margin:1rem 0 2.5rem}
+  .kudos h2{font-size:clamp(2rem,5vw,3.5rem);margin:1rem 0 2.5rem;color:var(--ink)}
   .qs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:clamp(1rem,2.5vw,2rem)}
   .q{background:var(--cream);border:1.5px solid var(--ink);padding:clamp(1.4rem,3vw,2rem);display:flex;flex-direction:column;gap:1rem}
   .q .stars{font-size:.9rem;letter-spacing:.18em;color:var(--terra)}
   .q blockquote{margin:0;font-family:var(--disp);font-weight:500;font-size:clamp(1.15rem,1.8vw,1.4rem);line-height:1.28;letter-spacing:-.02em}
   .q cite{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;font-style:normal;color:var(--purple-dark);margin-top:auto}
+  .q .more{margin:-.25rem 0 0}
+  .q .more summary{font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;color:var(--purple-dark);cursor:pointer;list-style:none;display:inline-flex;align-items:center;gap:.45rem;padding:.15rem 0;transition:color .2s}
+  .q .more summary::-webkit-details-marker{display:none}
+  .q .more summary::after{content:"+";font-size:1rem;line-height:1;transition:transform .2s}
+  .q .more[open] summary::after{content:"–"}
+  .q .more summary:hover{color:var(--terra)}
+  .q .more summary:focus-visible{outline:2px solid var(--purple-dark);outline-offset:3px}
+  .q .more p{font-family:var(--body);font-size:.92rem;font-weight:400;line-height:1.62;letter-spacing:0;color:var(--ink-700);margin:.85rem 0 0;border-top:1.5px solid var(--ink-200);padding-top:.85rem}
   @media(max-width:820px){.qs{grid-template-columns:1fr}}
 
   /* FAQ */
@@ -490,7 +499,7 @@ ul.az-bullets li::before {
   @media(max-width:820px){.foot .top{grid-template-columns:1fr 1fr}.foot .brand-col{grid-column:1/-1}}
 </style>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"Digital A-Z","description":"Custom Squarespace website design in Washington, DC — beautiful, responsive, and easy to manage.","url":"https://www.digitalaz.co/","priceRange":"$$","email":"atozwebcreative@gmail.com","founder":{"@type":"Person","name":"Ashley Zusman","sameAs":"https://www.linkedin.com/in/ashleyzusman"},"areaServed":[{"@type":"City","name":"Washington, D.C."},{"@type":"Country","name":"United States"}],"address":{"@type":"PostalAddress","addressLocality":"Washington","addressRegion":"DC","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":38.9072,"longitude":-77.0369},"sameAs":["https://www.linkedin.com/in/ashleyzusman"],"makesOffer":[{"@type":"Offer","name":"Landing Page","price":"1500","priceCurrency":"USD"},{"@type":"Offer","name":"Full Website","price":"3500","priceCurrency":"USD"},{"@type":"Offer","name":"Deluxe Website","price":"5500","priceCurrency":"USD"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"3","bestRating":"5"}}
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Digital A-Z","description":"Custom Squarespace website design in Washington, DC — beautiful, responsive, and easy to manage.","url":"https://www.digitalaz.co/","priceRange":"$$","email":"atozwebcreative@gmail.com","founder":{"@type":"Person","name":"Ashley Zusman","sameAs":"https://www.linkedin.com/in/ashleyzusman"},"areaServed":[{"@type":"City","name":"Washington, D.C."},{"@type":"Country","name":"United States"}],"address":{"@type":"PostalAddress","addressLocality":"Washington","addressRegion":"DC","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":38.9072,"longitude":-77.0369},"sameAs":["https://www.linkedin.com/in/ashleyzusman"],"makesOffer":[{"@type":"Offer","name":"Landing Page","price":"1500","priceCurrency":"USD"},{"@type":"Offer","name":"Full Website","price":"3500","priceCurrency":"USD"},{"@type":"Offer","name":"Deluxe Website","price":"5500","priceCurrency":"USD"}],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"3","bestRating":"5"},"review":[{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"author":{"@type":"Person","name":"Katharine Mason"},"reviewBody":"What a relief to find Ashley Zusman! She built me a sleek, eye-catching, easy to use website that is often the first interaction with my clients. I started with another web designer and was gravely disappointed. Then I found Ashley. After talking with me and asking the key questions to draw out the character of my studio, she developed a site that perfectly captured what I do. She was timely in her delivery, cost-effective, and it was a pleasure to work with her. When I need to make small changes, she does it immediately. I have been meaning to write this testimonial for a while, but I have been so busy with clients I have because of her that it took me a bit longer. I cannot say enough good things about her!"},{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"author":{"@type":"Organization","name":"Carolyn Homes"},"reviewBody":"Ashley was wonderful to work with in creating our new website! After hitting many roadblocks with other companies, we came to Ashley who was the only person able to make our vision into reality! She was patient, thoughtful, and flexible as we made many changes throughout the process. We look forward to growing our business through the new website!"},{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"author":{"@type":"Organization","name":"Elite Ops Exterminators"},"reviewBody":"We loved working with Ashley. She made the website process simple and stress-free, and the final product is exactly what we needed. It's been a huge win for our business."}]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why work with Digital A-Z?","acceptedAnswer":{"@type":"Answer","text":"We make the process approachable, collaborative, and efficient, blending creativity with strategy to turn your ideas into polished, high-performing Squarespace websites. As a Squarespace Circle Gold Member, every site meets the highest standards for design, performance, and functionality."}},{"@type":"Question","name":"What services do you offer?","acceptedAnswer":{"@type":"Answer","text":"Digital A-Z specializes in custom Squarespace website design. Whether you need a brand-new site or a complete refresh, we create modern, responsive websites that perform well, look great, and are easy to manage."}},{"@type":"Question","name":"How does the process work?","acceptedAnswer":{"@type":"Answer","text":"We start with discovery and strategy, then a sitemap and wireframes, followed by design mockups. Once approved, we build your site on Squarespace, refine it through testing, and launch. Most projects take 4 to 8 weeks."}},{"@type":"Question","name":"Will my site be mobile-friendly and editable?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every website is fully responsive across mobile, tablet, and desktop, and after launch we train you to manage and update your content yourself with no coding required."}},{"@type":"Question","name":"What's included in every package?","acceptedAnswer":{"@type":"Answer","text":"Every package includes full Squarespace account setup, a customized template with professionally designed pages, domain and hosting configuration, a custom contact form, and social media integration."}},{"@type":"Question","name":"What package add-ons are available?","acceptedAnswer":{"@type":"Answer","text":"Add-ons include SEO optimization, ongoing maintenance, troubleshooting and support, content development, copy editing, and graphic design."}}]}
@@ -538,10 +547,10 @@ ul.az-bullets li::before {
   <span class="mono">Selected work</span>
   <h2>Recent launches</h2>
   <div class="grid">
-    <a class="proj" href="https://www.headshotdc.com" target="_blank" rel="noopener"><div class="ph"><img src="images/headshotdc.jpg" alt="Headshot DC — Squarespace website by Digital A-Z" width="1400" height="788" loading="lazy" decoding="async"><span class="mono">Headshots · Squarespace</span></div><div class="meta"><h3>Headshot DC</h3><span class="yr">Visit ↗</span></div></a>
-    <a class="proj" href="https://www.boldbranchcollective.com" target="_blank" rel="noopener"><div class="ph"><img src="images/boldbranch.jpg" alt="Bold Branch Collective — Squarespace website by Digital A-Z" width="1400" height="788" loading="lazy" decoding="async"><span class="mono">Marketing · Squarespace</span></div><div class="meta"><h3>Bold Branch Collective</h3><span class="yr">Visit ↗</span></div></a>
-    <a class="proj" href="https://www.kmstudio-fitness.com" target="_blank" rel="noopener"><div class="ph"><img src="images/kmstudios.jpg" alt="KM Studios — Squarespace website by Digital A-Z" width="1400" height="788" loading="lazy" decoding="async"><span class="mono">Pilates · Squarespace</span></div><div class="meta"><h3>KM Studios</h3><span class="yr">Visit ↗</span></div></a>
-    <a class="proj" href="https://www.carolynhomes.com/" target="_blank" rel="noopener"><div class="ph"><img src="images/carolynhomes.jpg" alt="Carolyn Homes — Squarespace website by Digital A-Z" width="1400" height="788" loading="lazy" decoding="async"><span class="mono">Real Estate · Squarespace</span></div><div class="meta"><h3>Carolyn Homes</h3><span class="yr">Visit ↗</span></div></a>
+    <a class="proj" href="https://www.headshotdc.com" target="_blank" rel="noopener"><div class="ph"><img src="images/headshotdc.jpg?v=2" alt="Headshot DC — Squarespace website by Digital A-Z" width="1600" height="900" loading="lazy" decoding="async"></div><div class="meta"><h3>Headshot DC</h3><span class="yr">Visit ↗</span></div></a>
+    <a class="proj" href="https://www.boldbranchcollective.com" target="_blank" rel="noopener"><div class="ph"><img src="images/boldbranch.jpg?v=2" alt="Bold Branch Collective — Squarespace website by Digital A-Z" width="1600" height="900" loading="lazy" decoding="async"></div><div class="meta"><h3>Bold Branch Collective</h3><span class="yr">Visit ↗</span></div></a>
+    <a class="proj" href="https://www.kmstudio-fitness.com" target="_blank" rel="noopener"><div class="ph"><img src="images/kmstudios.jpg?v=2" alt="KM Studios — Squarespace website by Digital A-Z" width="1600" height="900" loading="lazy" decoding="async"></div><div class="meta"><h3>KM Studios</h3><span class="yr">Visit ↗</span></div></a>
+    <a class="proj" href="https://www.carolynhomes.com/" target="_blank" rel="noopener"><div class="ph"><img src="images/carolynhomes.jpg?v=2" alt="Carolyn Homes — Squarespace website by Digital A-Z" width="1400" height="788" loading="lazy" decoding="async"></div><div class="meta"><h3>Carolyn Homes</h3><span class="yr">Visit ↗</span></div></a>
   </div>
 </div></section>
 
@@ -574,8 +583,33 @@ ul.az-bullets li::before {
   <span class="mono">Client kudos</span>
   <h2>Don't just take my word</h2>
   <div class="qs">
-    <div class="q"><span class="stars">★★★★★</span><blockquote>"Ashley was the only person able to make our vision into reality."</blockquote><cite>— Carolyn Homes</cite></div>
-    <div class="q"><span class="stars">★★★★★</span><blockquote>"What a relief to find Ashley. She built a site that perfectly captured what I do."</blockquote><cite>— Katharine Mason, KM Studio</cite></div>
+    <div class="q">
+      <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+      <blockquote>"What a relief to find Ashley!"</blockquote>
+      <details class="more">
+        <summary>Read full review</summary>
+        <p>What a relief to find Ashley Zusman! She built me a sleek, eye-catching, easy to use website that is often the first interaction with my clients. I started with another web designer and was gravely disappointed. Then I found Ashley. After talking with me and asking the key questions to draw out the character of my studio, she developed a site that perfectly captured what I do. She was timely in her delivery, cost-effective, and it was a pleasure to work with her. When I need to make small changes, she does it immediately. I have been meaning to write this testimonial for a while, but I have been so busy with clients I have because of her that it took me a bit longer. I cannot say enough good things about her!</p>
+      </details>
+      <cite>— Katharine Mason, Owner, KM Studio</cite>
+    </div>
+    <div class="q">
+      <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+      <blockquote>"The only person able to make our vision into reality."</blockquote>
+      <details class="more">
+        <summary>Read full review</summary>
+        <p>Ashley was wonderful to work with in creating our new website! After hitting many roadblocks with other companies, we came to Ashley who was the only person able to make our vision into reality! She was patient, thoughtful, and flexible as we made many changes throughout the process. We look forward to growing our business through the new website!</p>
+      </details>
+      <cite>— Carolyn Homes Team</cite>
+    </div>
+    <div class="q">
+      <span class="stars" aria-label="5 out of 5 stars">★★★★★</span>
+      <blockquote>"It's been a huge win for our business."</blockquote>
+      <details class="more">
+        <summary>Read full review</summary>
+        <p>We loved working with Ashley. She made the website process simple and stress-free, and the final product is exactly what we needed. It's been a huge win for our business.</p>
+      </details>
+      <cite>— Elite Ops Exterminators</cite>
+    </div>
   </div>
 </div></section>
 
