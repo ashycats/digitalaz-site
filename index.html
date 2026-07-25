@@ -473,6 +473,12 @@ ul.az-bullets li::before {
   .form-card .submit{width:100%;font-family:var(--mono);text-transform:uppercase;font-size:.75rem;letter-spacing:.12em;background:var(--ink);color:var(--cream);border:0;padding:1rem;cursor:pointer;transition:background .2s;margin-top:.3rem}
   .form-card .submit:hover{background:var(--terra)}
   .form-card .submit:disabled{opacity:.6;cursor:default}
+  .form-card .req{color:var(--terra);margin-left:.25em;font-weight:700}
+  .form-card .opt{color:var(--ink-500);letter-spacing:.08em}
+  .form-card .reqnote{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-500);margin:0 0 1.1rem}
+  .form-card .reqnote span{color:var(--terra);font-weight:700}
+  .form-card input:user-invalid,.form-card select:user-invalid,.form-card textarea:user-invalid{border-color:var(--danger)}
+  .form-card .turnstile{margin:0 0 1.1rem;min-height:65px}
   .form-note{font-family:var(--mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;margin-top:1rem;min-height:1.2em}
   .form-note.ok{color:var(--success)}
   .form-note.err{color:var(--danger)}
@@ -657,16 +663,18 @@ ul.az-bullets li::before {
   </div>
   <form class="form-card" id="contactForm" novalidate>
     <div class="hp" aria-hidden="true"><label>Company (leave this blank)<input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+    <p class="reqnote">Fields marked <span>*</span> are required</p>
     <div class="row2">
-      <div class="fg"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" autocomplete="name" required></div>
-      <div class="fg"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="fg"><label for="cf-name">Name<span class="req" aria-hidden="true">*</span></label><input id="cf-name" name="name" type="text" autocomplete="name" required aria-required="true"></div>
+      <div class="fg"><label for="cf-email">Email<span class="req" aria-hidden="true">*</span></label><input id="cf-email" name="email" type="email" autocomplete="email" required aria-required="true"></div>
     </div>
     <div class="row2">
-      <div class="fg"><label for="cf-phone">Phone (optional)</label><input id="cf-phone" name="phone" type="tel" autocomplete="tel"></div>
-      <div class="fg"><label for="cf-website">Current website (optional)</label><input id="cf-website" name="website" type="text" placeholder="yoursite.com"></div>
+      <div class="fg"><label for="cf-phone">Phone<span class="req" aria-hidden="true">*</span></label><input id="cf-phone" name="phone" type="tel" autocomplete="tel" required aria-required="true"></div>
+      <div class="fg"><label for="cf-website">Current website <span class="opt">(optional)</span></label><input id="cf-website" name="website" type="text" placeholder="yoursite.com"></div>
     </div>
-    <div class="fg"><label for="cf-package">I'm interested in</label>
-      <select id="cf-package" name="package">
+    <div class="fg"><label for="cf-package">I'm interested in<span class="req" aria-hidden="true">*</span></label>
+      <select id="cf-package" name="package" required aria-required="true">
+        <option value="" disabled selected>Choose one…</option>
         <option value="Not sure yet">Not sure yet</option>
         <option value="Landing Page">Landing Page — $1,500+</option>
         <option value="Full Website">Full Website — $3,500+</option>
@@ -674,7 +682,8 @@ ul.az-bullets li::before {
         <option value="Revamp">Revamp of my current site</option>
       </select>
     </div>
-    <div class="fg"><label for="cf-message">Share your vision</label><textarea id="cf-message" name="message" required></textarea></div>
+    <div class="fg"><label for="cf-message">Share your vision<span class="req" aria-hidden="true">*</span></label><textarea id="cf-message" name="message" required aria-required="true"></textarea></div>
+    <div class="turnstile" id="cf-turnstile"></div>
     <button type="submit" class="submit">Send message</button>
     <p class="form-note" id="cf-note" role="status" aria-live="polite"></p>
   </form>
@@ -695,9 +704,47 @@ ul.az-bullets li::before {
   var SUPABASE_URL = 'https://jxnrmosgthbnegyszszc.supabase.co';
   var SUPABASE_ANON_KEY = 'sb_publishable_y2cjJR8OvTh1zUJbD_Phkw_OxH5rFsP';
   var SEND_EMAILS = false;  /* flip to true once Resend + edge function are set up */  /* set false to skip the confirmation emails */
+
+  /* ============ Cloudflare Turnstile ============
+     SITE key is public and belongs here. The SECRET key lives only in Supabase
+     as TURNSTILE_SECRET_KEY, read by the verify-turnstile edge function.      */
+  var TURNSTILE_SITE_KEY = '0x4AAAAAAD9tMeWcIWIEChNE';
   /* ============================================================================== */
+
   var form = document.getElementById('contactForm'); if(!form) return;
   var note = document.getElementById('cf-note');
+  var tsEnabled = TURNSTILE_SITE_KEY.indexOf('PASTE_') !== 0 && TURNSTILE_SITE_KEY.length > 8;
+  var tsWidgetId = null;
+
+  if(tsEnabled){
+    window.onTurnstileLoad = function(){
+      tsWidgetId = window.turnstile.render('#cf-turnstile', {
+        sitekey: TURNSTILE_SITE_KEY, theme: 'light', action: 'contact'
+      });
+    };
+    var ts = document.createElement('script');
+    ts.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit';
+    ts.async = true; ts.defer = true;
+    document.head.appendChild(ts);
+  }
+  function tsToken(){
+    if(!tsEnabled || !window.turnstile || tsWidgetId === null) return '';
+    return window.turnstile.getResponse(tsWidgetId) || '';
+  }
+  function tsReset(){
+    if(tsEnabled && window.turnstile && tsWidgetId !== null) window.turnstile.reset(tsWidgetId);
+  }
+  /* Fails closed: unreachable function means no submission. */
+  function verifyToken(token){
+    if(!tsEnabled) return Promise.resolve(true);
+    return fetch(SUPABASE_URL.replace(/\/$/,'') + '/functions/v1/verify-turnstile', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+SUPABASE_ANON_KEY },
+      body: JSON.stringify({ token: token })
+    }).then(function(r){ return r.json(); })
+      .then(function(j){ return j && j.success === true; })
+      .catch(function(){ return false; });
+  }
   var configured = SUPABASE_URL.indexOf('http') === 0 && SUPABASE_ANON_KEY.indexOf('YOUR_') !== 0;
   var clientPromise = null;
   var loadedAt = Date.now();
@@ -721,6 +768,13 @@ ul.az-bullets li::before {
     /* Spam guards: honeypot + minimum fill time. Fail silently so bots get no signal. */
     if(form.company && form.company.value){ form.reset(); note.textContent = "Thanks! Your message is in \u2014 I'll be in touch shortly."; note.classList.add('ok'); return; }
     if(Date.now() - loadedAt < 3000){ form.reset(); note.textContent = "Thanks! Your message is in \u2014 I'll be in touch shortly."; note.classList.add('ok'); return; }
+    var token = tsToken();
+    if(tsEnabled && !token){ note.textContent = 'Please complete the anti-spam check.'; note.classList.add('err'); return; }
+    if(tsEnabled){
+      note.textContent = 'Verifying\u2026';
+      var ok = await verifyToken(token);
+      if(!ok){ tsReset(); note.textContent = 'Verification failed. Please try the check again.'; note.classList.add('err'); return; }
+    }
     var data = {
       name: form.name.value.trim(), email: form.email.value.trim(),
       phone: form.phone.value.trim() || null, website: form.website.value.trim() || null,
@@ -748,6 +802,7 @@ ul.az-bullets li::before {
       await sendEmails();
       form.reset(); note.textContent = "Thanks! Your message is in — check your inbox for a confirmation. I'll be in touch shortly."; note.classList.add('ok');
     }catch(err){
+      tsReset();
       note.textContent = 'Something went wrong. Please email atozwebcreative@gmail.com.'; note.classList.add('err');
     }finally{ btn.disabled = false; }
   });
